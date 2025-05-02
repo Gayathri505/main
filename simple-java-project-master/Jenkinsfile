@@ -16,6 +16,11 @@ pipeline {
              bat 'mvn -f simple-java-project-master/pom.xml clean install -DskipTests'
         }
         }
+        stage('Artifactupload') {
+            steps {
+            nexusArtifactUploader artifacts: [[artifactId: 'works-with-heroku', classifier: '', file: 'simple-java-project-master/target/works-with-heroku-2.0.war', type: 'war']], credentialsId: 'nexus cred ', groupId: 'nexus', nexusUrl: 'localhost:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-test', version: '2.0'
+        }
+        }
         stage('deploy') {
             steps {
              deploy adapters: [tomcat8(credentialsId: 'tomcat new', path: '', url: 'http://localhost:7000/')], contextPath: 'simple-java-project-master', war: '**/*.war'
