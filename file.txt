@@ -1,4 +1,9 @@
+<<<<<<< HEAD
+Hi team
+how are you
+=======
 Hi Team
 This is used for Devops practice purpose
 
 
+>>>>>>> main
